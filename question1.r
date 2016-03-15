@@ -1,7 +1,8 @@
 library(fpc)
 library(ggmap)
 
-targetFile = './data/small_test.csv'
+# targetFile = './data/small_test.csv'
+targetFile = './data/test.csv'
 
 # read file
 data <- read.csv(targetFile)
@@ -17,11 +18,11 @@ ds <- dbscan(eps=0.003, locations)
 # create spatial data for drawing points on map
 spData <- locations
 # append cluster result
-spData$cluster <- ds[[1]]
+spData$cluster <- factor(ds[[1]])
 
 # create map
 targetLon = mean(locations[[1]])
 targetLat = mean(locations[[2]])
-map <- get_map(location = c(lon=targetLon, lat=targetLat), zoom=10)
-ggmap(map) + geom_point(aes(x=pickup_longitude, y=pickup_latitude), data= locations)
+map <- get_map(location = c(lon=targetLon, lat=targetLat), zoom=12)
+ggmap(map) + geom_point(aes(x=pickup_longitude, y=pickup_latitude, colour=cluster), data=spData)
 # plot(ds, locations)
