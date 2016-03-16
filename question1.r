@@ -1,8 +1,8 @@
 library(fpc)
 library(ggmap)
 
-# targetFile = './data/small_test.csv'
-targetFile = './data/test.csv'
+targetFile = './data/small_test.csv'
+# targetFile = './data/test.csv'
 
 # read file
 data <- read.csv(targetFile)
